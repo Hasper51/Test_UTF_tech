@@ -7,7 +7,12 @@ from menu.serializers import FoodListSerializer
 
 
 class FoodListView(APIView):
-    def get(self, request, *args, **kwargs):
+    """
+    API эндпоинт для получения списка категорий блюд и самих блюд.
+    Возвращает только категории с опубликованными блюдами,
+    включая только опубликованные блюда в этих категориях.
+    """
+    def get(self, request):
         published_foods = Food.objects.filter(is_publish=True)
 
         categories = FoodCategory.objects.filter(
